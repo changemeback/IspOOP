@@ -1,0 +1,122 @@
+using System;
+ 
+namespace ConsoleApp7
+{
+    interface IDevice
+    {
+ 
+        string Type();
+        int Price();
+        string show();
+        static string destination;
+        static string power;
+ 
+ 
+    }
+    interface IoTDevice: IDevice
+    {
+        int show_time();
+    }
+    class KitchenDevice : IDevice
+    {
+        public KitchenDevice(string type, int price, string manufacturer)
+        {
+            this.type = type;
+            this.price = price;
+            this.manufacturer = manufacturer;
+        }
+        public string type;
+        public int price;
+        public string manufacturer;
+        public string destination;
+        public string power;
+        public string Type()
+        {
+            return type;
+        }
+        public int Price()
+        {
+            return price;
+        }
+        public string show()
+        {
+            return manufacturer;
+        }
+    }
+    class SmartTracker: IoTDevice
+    {
+        public SmartTracker(string type, int price, string manufacturer, int time)
+        {
+            this.type = type;
+            this.price = price;
+            this.manufacturer = manufacturer;
+            this.time = time;
+        }
+        public int time;
+        public string type;
+        public int price;
+        public string manufacturer;
+        public string destination;
+        public string power;
+        public string Type()
+        {
+            return type;
+        }
+        public int Price()
+        {
+            return price;
+        }
+        public string show()
+        {
+            return manufacturer;
+        }
+        public int show_time()
+        {
+            return time;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Девайси:");
+            void findByManufacturerDevices(string manufacturer, KitchenDevice[] devices)
+            {
+                foreach (KitchenDevice str in devices)
+                {
+                    if(str.show() == manufacturer)
+                    {
+                        Console.WriteLine(str.show());
+                    }
+                }
+            }
+            void findByManufacturerTrackers(string manufacturer, SmartTracker[] devices)
+            {
+                Console.WriteLine("Трекери:");
+                foreach (SmartTracker str in devices)
+                { 
+                    if (str.show() == manufacturer)
+                    {
+                        Console.WriteLine(str.show());
+                    }
+                }
+            }
+            KitchenDevice[] kitchen_devices =
+            {
+                new KitchenDevice("Тостер", 799, "Китай"),
+                new KitchenDevice("Мікрохвильовка", 3999, "Німеччина"),
+                new KitchenDevice("Комбайн", 6999, "Японія")
+            };
+            SmartTracker[] trackers =
+            {
+                new SmartTracker("MiBand", 1299, "Xiaomi", 16),
+                new SmartTracker("Apple Watch", 12000, "Apple", 8),
+                new SmartTracker("LIGE BW", 710, "LIGE", 6)
+            };
+            findByManufacturerDevices("Японія", kitchen_devices);
+            findByManufacturerTrackers("Apple", trackers);
+ 
+        }
+    }
+}
+ 
